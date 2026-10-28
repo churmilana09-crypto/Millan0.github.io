@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Букашка - Цветочный магазин</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ШАПКА САЙТА -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">БУКАШКА</a>
+            <nav class="nav">
+                <a href="#">Главная</a>
+                <a href="#">Каталог</a>
+                <a href="#">Доставка</a>
+                <a href="#">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <input type="text" class="search" placeholder="Поиск">
+                <div class="btn-placeholder"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- СТРАНИЦА 1: ГЛАВНАЯ -->
+        <section class="page-main container">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="hero-text">
+                    <span class="subtitle">ЦВЕТОЧНАЯ БУТИК-СТУДИЯ</span>
+                    <h1>Букеты для важных моментов</h1>
+                    <p>Свежие цветы и букеты, созданные с любовью. Быстрая доставка и уникальный дизайн.</p>
+                </div>
+                <div class="img-placeholder hero-img"></div>
+            </div>
+
+            <!-- Фильтры -->
+            <div class="filters">
+                <div class="filter-group">
+                    <h3>Подберите подходящий букет</h3>
+                    <div class="filter-row">
+                        <div class="filter-item">
+                            <span>По поводу</span>
+                            <label><input type="checkbox"> День рождения</label>
+                            <label><input type="checkbox"> Свидание</label>
+                        </div>
+                        <div class="filter-item">
+                            <span>По цвету</span>
+                            <div class="color-circles">
+                                <span class="circle"></span><span class="circle"></span><span class="circle"></span><span class="circle"></span>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <span>По цене</span>
+                            <div class="price-inputs">
+                                <input type="text" placeholder="от 1000">
+                                <input type="text" placeholder="до 5000">
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <span>По составу</span>
+                            <label><input type="checkbox"> Розы</label>
+                            <label><input type="checkbox"> Пионы</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Популярные букеты -->
+            <div class="section-header">
+                <h2>Популярные букеты</h2>
+                <a href="#" class="link-all">Смотреть все товары &rarr;</a>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="img-placeholder"></div>
+                    <div class="card-footer"><button class="btn-sm">В корзину</button></div>
+                </div>
+                <div class="card">
+                    <div class="img-placeholder"></div>
+                    <div class="card-footer"><button class="btn-sm">В корзину</button></div>
+                </div>
+                <div class="card">
+                    <div class="img-placeholder"></div>
+                    <div class="card-footer"><button class="btn-sm">В корзину</button></div>
+                </div>
+            </div>
+
+            <!-- Как это работает -->
+            <h2 style="margin-top: 60px;">Как это работает</h2>
+            <div class="grid-4 steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <p>Выберите букет в каталоге</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <p>Укажите адрес и удобное время доставки</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <p>Мы соберем и доставим букет</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <p>Вы получаете положительные эмоции</p>
+                </div>
+            </div>
+
+            <!-- Отзывы -->
+            <div class="section-header" style="margin-top: 60px;">
+                <h2>Отзывы</h2>
+                <a href="#" class="link-all">Смотреть все отзывы &rarr;</a>
+            </div>
+            <div class="grid-4 reviews">
+                <div class="review">
+                    <div class="avatar"></div>
+                    <p>Отличный сервис! Букет свежий и красивый. Доставили быстро. Большое спасибо!</p>
+                    <span class="name">Иван Иванов</span>
+                </div>
+                <div class="review">
+                    <div class="avatar"></div>
+                    <p>Отличный сервис! Букет свежий и красивый. Доставили быстро. Большое спасибо!</p>
+                    <span class="name">Иван Иванов</span>
+                </div>
+                <div class="review">
+                    <div class="avatar"></div>
+                    <p>Отличный сервис! Букет свежий и красивый. Доставили быстро. Большое спасибо!</p>
+                    <span class="name">Иван Иванов</span>
+                </div>
+                <div class="review">
+                    <div class="avatar"></div>
+                    <p>Отличный сервис! Букет свежий и красивый. Доставили быстро. Большое спасибо!</p>
+                    <span class="name">Иван Иванов</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛИТЕЛЬ СТРАНИЦ -->
+        <hr style="margin: 60px 0; border: 1px dashed #ccc;">
+
+        <!-- СТРАНИЦА 2: КАРТОЧКА ТОВАРА -->
+        <section class="page-product container">
+            <h2>Фото товара</h2>
+            <div class="product-layout">
+                <!-- Левая колонка (Фото) -->
+                <div class="product-gallery">
+                    <div class="img-placeholder big-img"></div>
+                    <div class="thumbnails">
+                        <div class="img-placeholder thumb"></div>
+                        <div class="img-placeholder thumb"></div>
+                        <div class="img-placeholder thumb"></div>
+                        <div class="img-placeholder thumb"></div>
+                        <div class="img-placeholder thumb"></div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка (Инфо) -->
+                <div class="product-info">
+                    <h1>Букет "Утренний свет"</h1>
+                    <div class="price">3 490 ₽</div>
+                    
+                    <button class="btn-big">Купить</button>
+
+                    <div class="specs">
+                        <h3>Характеристики и состав</h3>
+                        <ul>
+                            <li>Состав: розы, пионы, эустома</li>
+                            <li>Размер: 30x40 см</li>
+                            <li>Упаковка: крафт</li>
+                            <li>Аромат: легкий</li>
+                        </ul>
+                    </div>
+
+                    <div class="description">
+                        <h3>Описание</h3>
+                        <p>Этот букет идеально подойдет для любого повода. Свежие цветы, собранные с любовью, создадут атмосферу праздника.</p>
+                    </div>
+
+                    <div class="buy-actions">
+                        <div class="qty">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                        <button class="btn-big">Добавить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Доставка -->
+            <div class="delivery">
+                <h2>Доставка и получение</h2>
+                <div class="grid-3 delivery-cards">
+                    <div class="delivery-card">
+                        <div class="icon">01</div>
+                        <h4>По городу</h4>
+                        <p>Курьерская доставка по городу в течение 2 часов.</p>
+                    </div>
+                    <div class="delivery-card">
+                        <div class="icon">02</div>
+                        <h4>К ближайшему пункту</h4>
+                        <p>Самовывоз из пункта выдачи в удобное время.</p>
+                    </div>
+                    <div class="delivery-card">
+                        <div class="icon">03</div>
+                        <h4>Удаленное получение</h4>
+                        <p>Отправка в другой город транспортной компанией.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ПОДВАЛ САЙТА -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a href="#" class="logo">БУКАШКА</a>
+            <div class="footer-links">
+                <a href="#">Контакты</a>
+                <a href="#">+7 (999) 123-45-67</a>
+                <a href="#">info@bukashka.ru</a>
+            </div>
+            <div class="socials">
+                <span class="soc-icon">VK</span>
+                <span class="soc-icon">TG</span>
+                <span class="soc-icon">WA</span>
+            </div>
+            <div class="copyright">© 2026 БУКАШКА</div>
+        </div>
+    </footer>
+
+</body>
+</html>
