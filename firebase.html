@@ -69,7 +69,7 @@ logoutButton.addEventListener('click', () => {
     const analytics = getAnalytics(app);
     
     // Инициализация сервисов авторизации
-    const auth = getAuth(app);
+    const initializeApp(firebaseConfig);
     const provider = new GithubAuthProvider();
 
     const loginButton = document.getElementById("github-login-btn");
