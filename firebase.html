@@ -2,95 +2,115 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Auth с Firebase</title>
+  <title>Devil App 😈</title>
   <style>
-    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-    button { padding: 10px 20px; font-size: 16px; background-color: #24292e; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background-color: #444; }
-    #user-info { margin-top: 20px; font-size: 18px; }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffb6c1; /* Нежно-розовый фон */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+    }
+    h2 { color: #333; margin-bottom: 20px; }
+    button {
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button:hover { transform: scale(1.05); }
+    #btn-login { background-color: #24292e; color: white; }
+    #btn-logout { background-color: #ff4d4d; color: white; display: none; }
+    
+    /* Анимация летящих чертиков */
+    .devil {
+      position: absolute;
+      bottom: -60px;
+      pointer-events: none;
+      user-select: none;
+      animation: floatUp 6s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-<button id="logout-button" style="display: none;">Выйти</button>
 
-  <!-- Кнопка для входа -->
-  <button id="github-login-btn">Войти через GitHub</button>
-  <div id="user-info"></div>
+  <div class="card">
+    <h2 id="user-info">Вы не вошли в систему</h2>
+    <button id="btn-login">Войти через GitHub</button>
+    <button id="btn-logout">Выйти</button>
+  </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
-    // Импортируем необходимые модули авторизации из SDK
-    import { getAuth, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GithubAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-
-
-    import { signOut, onAuthStateChanged } from "firebase/auth";
-
-const auth = getAuth();
-const logoutButton = document.getElementById('logout-button');
-
-// Отслеживаем, вошел ли пользователь в систему
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // Пользователь авторизован — показываем кнопку выхода
-    logoutButton.style.display = "block";
-  } else {
-    // Пользователь не авторизован — скрываем кнопку
-    logoutButton.style.display = "none";
-  }
-});
-
-// Обработчик нажатия на кнопку "Выйти"
-logoutButton.addEventListener('click', () => {
-  signOut(auth)
-    .then(() => {
-      console.log("Вы успешно вышли из системы!");
-      // Здесь можно перенаправить пользователя на главную страницу
-    })
-    .catch((error) => {
-      console.error("Ошибка при выходе:", error);
-    });
-});
-    // Конфигурация вашего проекта lalka
+    // Укажите ваши ключи из настроек Firebase Console (Вкладка General)
     const firebaseConfig = {
-      apiKey: "AIzaSyBJvlxtk4Lmo1iZvTzgHw7P96tOUggVGOs",
+      apiKey: "ВАШ_API_KEY",
       authDomain: "lalka-2aeab.firebaseapp.com",
       projectId: "lalka-2aeab",
-      storageBucket: "lalka-2aeab.firebasestorage.app",
+      storageBucket: "lalka-2aeab.appspot.com",
       messagingSenderId: "995940230244",
-      appId: "1:995940230244:web:d68a94975f48e044fbab71",
-      measurementId: "G-9LRE7FN0WB"
+      appId: "ВАШ_APP_ID"
     };
 
-    // Инициализация
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    
-    // Инициализация сервисов авторизации
-    const initializeApp(firebaseConfig);
+    const auth = getAuth(app);
     const provider = new GithubAuthProvider();
 
-    const loginButton = document.getElementById("github-login-btn");
-    const userInfoDiv = document.getElementById("user-info");
+    const btnLogin = document.getElementById("btn-login");
+    const btnLogout = document.getElementById("btn-logout");
+    const userInfo = document.getElementById("user-info");
 
-    loginButton.addEventListener("click", () => {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          // Получение пользователя и токена GitHub
-          const credential = GithubAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
-          const user = result.user;
+    btnLogin.addEventListener("click", () => signInWithPopup(auth, provider).catch(err => alert("Ошибка: " + err.message)));
+    btnLogout.addEventListener("click", () => signOut(auth));
 
-          console.log("Успешный вход:", user);
-          userInfoDiv.innerHTML = `Привет, <strong>${user.displayName || user.reloadUserInfo.screenName}</strong>!`;
-        })
-        .catch((error) => {
-          console.error("Ошибка при входе:", error);
-          userInfoDiv.innerHTML = `Ошибка авторизации: ${error.message}`;
-        });
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userInfo.textContent = `Привет, ${user.displayName || 'Пользователь'}! 😈`;
+        btnLogin.style.display = "none";
+        btnLogout.style.display = "block";
+      } else {
+        userInfo.textContent = "Вы не вошли в систему";
+        btnLogin.style.display = "block";
+        btnLogout.style.display = "none";
+      }
     });
+
+    // Генерация летящих чертиков
+    function createDevil() {
+      const dev = document.createElement('div');
+      dev.className = 'devil';
+      dev.innerText = '😈';
+      dev.style.left = Math.random() * 100 + 'vw';
+      dev.style.fontSize = Math.random() * 25 + 20 + 'px';
+      dev.style.animationDuration = Math.random() * 4 + 4 + 's'; // разная скорость
+      document.body.appendChild(dev);
+      setTimeout(() => dev.remove(), 8000); // чистим память
+    }
+    setInterval(createDevil, 500); // создавать чертика каждые полсекунды
   </script>
 </body>
 </html>
