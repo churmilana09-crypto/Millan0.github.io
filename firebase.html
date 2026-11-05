@@ -12,6 +12,7 @@
   </style>
 </head>
 <body>
+<button id="logout-button" style="display: none;">Выйти</button>
 
   <!-- Кнопка для входа -->
   <button id="github-login-btn">Войти через GitHub</button>
@@ -23,6 +24,35 @@
     // Импортируем необходимые модули авторизации из SDK
     import { getAuth, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
+
+
+    import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
+const logoutButton = document.getElementById('logout-button');
+
+// Отслеживаем, вошел ли пользователь в систему
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // Пользователь авторизован — показываем кнопку выхода
+    logoutButton.style.display = "block";
+  } else {
+    // Пользователь не авторизован — скрываем кнопку
+    logoutButton.style.display = "none";
+  }
+});
+
+// Обработчик нажатия на кнопку "Выйти"
+logoutButton.addEventListener('click', () => {
+  signOut(auth)
+    .then(() => {
+      console.log("Вы успешно вышли из системы!");
+      // Здесь можно перенаправить пользователя на главную страницу
+    })
+    .catch((error) => {
+      console.error("Ошибка при выходе:", error);
+    });
+});
     // Конфигурация вашего проекта lalka
     const firebaseConfig = {
       apiKey: "AIzaSyBJvlxtk4Lmo1iZvTzgHw7P96tOUggVGOs",
