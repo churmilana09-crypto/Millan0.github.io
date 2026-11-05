@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Auth с Firebase</title>
+  <style>
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+    button { padding: 10px 20px; font-size: 16px; background-color: #24292e; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #444; }
+    #user-info { margin-top: 20px; font-size: 18px; }
+  </style>
+</head>
+<body>
+
+  <!-- Кнопка для входа -->
+  <button id="github-login-btn">Войти через GitHub</button>
+  <div id="user-info"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
+    // Импортируем необходимые модули авторизации из SDK
+    import { getAuth, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+    // Конфигурация вашего проекта lalka
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJvlxtk4Lmo1iZvTzgHw7P96tOUggVGOs",
+      authDomain: "lalka-2aeab.firebaseapp.com",
+      projectId: "lalka-2aeab",
+      storageBucket: "lalka-2aeab.firebasestorage.app",
+      messagingSenderId: "995940230244",
+      appId: "1:995940230244:web:d68a94975f48e044fbab71",
+      measurementId: "G-9LRE7FN0WB"
+    };
+
+    // Инициализация
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    
+    // Инициализация сервисов авторизации
+    const auth = getAuth(app);
+    const provider = new GithubAuthProvider();
+
+    const loginButton = document.getElementById("github-login-btn");
+    const userInfoDiv = document.getElementById("user-info");
+
+    loginButton.addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // Получение пользователя и токена GitHub
+          const credential = GithubAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          const user = result.user;
+
+          console.log("Успешный вход:", user);
+          userInfoDiv.innerHTML = `Привет, <strong>${user.displayName || user.reloadUserInfo.screenName}</strong>!`;
+        })
+        .catch((error) => {
+          console.error("Ошибка при входе:", error);
+          userInfoDiv.innerHTML = `Ошибка авторизации: ${error.message}`;
+        });
+    });
+  </script>
+</body>
+</html>
